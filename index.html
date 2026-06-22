@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dopamin İlerleme Barı</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="progress-box">
+    <p class="progress-title">To-Do Wıth Progress Bar</p>
+    <div class="task-setup">
+      <label for="task-count" class="task-setup__label">Task Count</label>
+      <input
+        type="number"
+        id="task-count"
+        class="task-setup__input"
+        min="1"
+        max="99"
+        value="5"
+      >
+      <label for="task-list" class="task-setup__label">
+        Task List
+        <span class="task-setup__optional">(Optional)</span>
+      </label>
+      <textarea
+        id="task-list"
+        class="task-setup__textarea"
+        rows="5"
+        placeholder="Write each task in a new line&#10;If you fill it, the number will be calculated from here"
+      ></textarea>
+      <p class="task-setup__meta">
+        <span class="task-meta-counter">0 / 5 completed</span>
+        ·
+        <span class="task-meta-step">Each task +20%</span>
+      </p>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill"></div>
+    </div>
+    <span class="progress-label">%0</span>
+    <div class="progress-actions">
+      <button type="button" class="progress-btn progress-btn--complete">Task Completed</button>
+      <button type="button" class="progress-btn progress-btn--reset">Reset</button>
+    </div>
+  </div>
+  <script src="script.js" defer></script>
+</body>
+</html>

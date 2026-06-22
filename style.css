@@ -1,0 +1,161 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #000000;
+  --surface: #151515;
+  --border: rgba(255, 255, 255, 0.1);
+  --text: #eeeeee;
+  --text-muted: #909090;
+  --purple-start: #4500ff;
+  --purple-end: #cc00ff;
+  --track: #1f1f1f;
+  --radius: 20px;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding: 1.5rem;
+}
+
+.progress-box {
+    width: min(600px, 100%);
+    padding: 1.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    /*box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4); */
+}
+  
+.progress-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.task-setup {
+    margin-bottom: 1.25rem;
+}
+
+.task-setup__label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.task-setup__optional {
+    font-weight: 400;
+    opacity: 0.75;
+}
+
+.task-setup__input,
+.task-setup__textarea {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    margin-bottom: 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) - 6px);
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.875rem;
+}
+
+.task-setup__input {
+    max-width: 6rem;
+}
+
+.task-setup__textarea {
+    resize: vertical;
+    min-height: 5rem;
+    line-height: 1.5;
+}
+
+.task-setup__input:focus,
+.task-setup__textarea:focus {
+    outline: none;
+    border-color: var(--purple-end);
+}
+
+.task-setup__meta {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+.task-meta-step {
+    color: var(--purple-end);
+}
+  
+.progress-label {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--purple-end);
+}
+.progress-track {
+    height: 16px;
+    background: var(--track);
+    border-radius: 999px;
+    overflow: hidden;
+}
+  
+.progress-fill {
+    height: 100%;
+    width: 0%; 
+    background: linear-gradient(90deg, var(--purple-start), var(--purple-end));
+    border-radius: inherit;
+    box-shadow: 0 0 20px #7745ff90;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.progress-btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) - 4px);
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.4s, border-color 0.4s, opacity 0.4s;
+}
+
+.progress-btn:hover:not(:disabled) {
+    background: rgba(204, 0, 255, 0.12);
+    border-color: var(--purple-end);
+}
+
+.progress-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.progress-btn--reset:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--text-muted);
+}
