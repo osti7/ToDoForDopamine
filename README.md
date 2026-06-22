@@ -1,4 +1,4 @@
-# ToDoForDopamine 🧠💜
+# ToDoForDopamine
 
 A minimalist, dark-themed habit and task tracking dashboard designed to visualize progress and trigger dopamine release upon task completion. Built with a focus on clean UI/UX and smooth animations.
 
