@@ -6,8 +6,24 @@ const taskCountInput = document.querySelector('#task-count');
 const taskListInput = document.querySelector('#task-list');
 const metaCounter = document.querySelector('.task-meta-counter');
 const metaStep = document.querySelector('.task-meta-step');
+const themeToggle = document.querySelector('.theme-toggle');
 
 let completedTasks = 0;
+
+function applyTheme(theme) {
+  const isLight = theme === 'light';
+  document.documentElement.setAttribute('data-theme', isLight ? 'light' : 'dark');
+  themeToggle.textContent = isLight ? 'Dark' : 'Light';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  applyTheme(isLight ? 'dark' : 'light');
+}
+
+applyTheme(localStorage.getItem('theme') === 'light' ? 'light' : 'dark');
+themeToggle.addEventListener('click', toggleTheme);
 
 function getTotalTasks() {
   const fromList = taskListInput.value

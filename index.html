@@ -4,11 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dopamin İlerleme Barı</title>
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="progress-box">
-    <p class="progress-title">To-Do Wıth Progress Bar</p>
+    <div class="progress-header">
+      <p class="progress-title">To-Do Wıth Progress Bar</p>
+      <button type="button" class="theme-toggle" aria-label="Toggle color theme">Light</button>
+    </div>
     <div class="task-setup">
       <label for="task-count" class="task-setup__label">Task Count</label>
       <input
