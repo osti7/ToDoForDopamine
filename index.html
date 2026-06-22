@@ -3,55 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dopamin İlerleme Barı</title>
+  <title>To-Do For Dopamine</title>
   <script>
-    if (localStorage.getItem('theme') === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
+    (function () {
+      try {
+        var saved = JSON.parse(localStorage.getItem('todoForDopamine') || '{}');
+        if (saved.colorTheme) {
+          document.documentElement.setAttribute('data-color', saved.colorTheme);
+        }
+      } catch (error) {}
+    })();
   </script>
+  <!-- Görseli sen seçeceksin: dosyayı assets/favicon.png olarak kaydet -->
+  <link rel="icon" type="image/png" href="checklist.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="progress-box">
     <div class="progress-header">
       <p class="progress-title">To-Do Wıth Progress Bar</p>
-      <button type="button" class="theme-toggle" aria-label="Toggle color theme">Light</button>
+
+      <div class="theme-picker">
+        <button
+          type="button"
+          class="theme-picker__trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-label="Choose color theme"
+        >
+          Theme
+        </button>
+        <div class="theme-picker__menu" hidden>
+          <p class="theme-picker__title">Color</p>
+          <div class="theme-picker__options">
+            <button type="button" class="theme-picker__option" data-color="purple" aria-label="Purple theme">
+              <span class="theme-picker__swatch theme-picker__swatch--purple"></span>
+              Purple
+            </button>
+            <button type="button" class="theme-picker__option" data-color="red" aria-label="Red theme">
+              <span class="theme-picker__swatch theme-picker__swatch--red"></span>
+              Red
+            </button>
+            <button type="button" class="theme-picker__option" data-color="yellow" aria-label="Yellow theme">
+              <span class="theme-picker__swatch theme-picker__swatch--yellow"></span>
+              Yellow
+            </button>
+            <button type="button" class="theme-picker__option" data-color="green" aria-label="Green theme">
+              <span class="theme-picker__swatch theme-picker__swatch--green"></span>
+              Green
+            </button>
+            <button type="button" class="theme-picker__option" data-color="blue" aria-label="Blue theme">
+              <span class="theme-picker__swatch theme-picker__swatch--blue"></span>
+              Blue
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="task-setup">
-      <label for="task-count" class="task-setup__label">Task Count</label>
-      <input
-        type="number"
-        id="task-count"
-        class="task-setup__input"
-        min="1"
-        max="99"
-        value="5"
-      >
-      <label for="task-list" class="task-setup__label">
-        Task List
-        <span class="task-setup__optional">(Optional)</span>
-      </label>
-      <textarea
-        id="task-list"
-        class="task-setup__textarea"
-        rows="5"
-        placeholder="Write each task in a new line&#10;If you fill it, the number will be calculated from here"
-      ></textarea>
-      <p class="task-setup__meta">
-        <span class="task-meta-counter">0 / 5 completed</span>
+
+    <div class="task-section">
+      <form class="task-add" autocomplete="off">
+        <input
+          type="text"
+          class="task-add__input"
+          placeholder="New task..."
+          maxlength="120"
+          aria-label="New task"
+        >
+        <button type="submit" class="task-add__btn" aria-label="Add task">+</button>
+      </form>
+
+      <ul class="task-list" aria-live="polite"></ul>
+
+      <p class="task-meta">
+        <span class="task-meta-counter">0 / 0 completed</span>
         ·
-        <span class="task-meta-step">Each task +20%</span>
+        <span class="task-meta-step">Add a task to start</span>
       </p>
     </div>
+
     <div class="progress-track">
       <div class="progress-fill"></div>
     </div>
     <span class="progress-label">%0</span>
-    <div class="progress-actions">
-      <button type="button" class="progress-btn progress-btn--complete">Task Completed</button>
-      <button type="button" class="progress-btn progress-btn--reset">Reset</button>
-    </div>
   </div>
+
   <script src="script.js" defer></script>
 </body>
 </html>
