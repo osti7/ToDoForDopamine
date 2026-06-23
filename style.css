@@ -19,7 +19,7 @@
   --input-bg: #000000;
   --fill-glow: #7745ff90;
   --btn-accent-hover: rgba(204, 0, 255, 0.14);
-  --radius: 20px;
+  --radius: 22px;
 }
 
 [data-color="red"] {
@@ -48,6 +48,13 @@
   --accent-end: #0095ff;
   --fill-glow: #3b82f690;
   --btn-accent-hover: rgba(59, 130, 246, 0.14);
+}
+
+[data-color="black"] {
+  --accent-start: #000000;
+  --accent-end: #505050;
+  --fill-glow: #ffffff90;
+  --btn-accent-hover: rgba(161, 161, 161, 0.14);
 }
 
 body {
@@ -191,6 +198,10 @@ body {
 
 .theme-picker__swatch--blue {
   background: linear-gradient(135deg, #0000ff, #0095ff);
+}
+
+.theme-picker__swatch--black {
+  background: linear-gradient(135deg, #000000, #505050);
 }
 
 .task-section {
@@ -376,4 +387,9 @@ body {
   border-radius: inherit;
   box-shadow: 0 0 20px var(--fill-glow);
   transition: width 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.progress-track:hover {
+  box-shadow: 0 0 20px var(--fill-glow);  
+  transition: box-shadow 0.2s;
 }
