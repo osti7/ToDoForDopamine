@@ -13,39 +13,39 @@
   --border: rgba(255, 255, 255, 0.1);
   --text: #eeeeee;
   --text-muted: #909090;
-  --accent-start: #4500ff;
-  --accent-end: #cc00ff;
+  --accent-start: #8000ff;
+  --accent-end: #c600ff;
   --track: #1f1f1f;
   --input-bg: #000000;
   --fill-glow: #7745ff90;
-  --btn-accent-hover: rgba(204, 0, 255, 0.12);
+  --btn-accent-hover: rgba(204, 0, 255, 0.14);
   --radius: 20px;
 }
 
 [data-color="red"] {
-  --accent-start: #dc2626;
-  --accent-end: #f97316;
+  --accent-start: #ff0000;
+  --accent-end: #ff5000;
   --fill-glow: #ef444490;
   --btn-accent-hover: rgba(239, 68, 68, 0.14);
 }
 
 [data-color="yellow"] {
-  --accent-start: #ca8a04;
-  --accent-end: #facc15;
+  --accent-start: #ffff00;
+  --accent-end: #ffc300;
   --fill-glow: #eab30890;
   --btn-accent-hover: rgba(234, 179, 8, 0.14);
 }
 
 [data-color="green"] {
-  --accent-start: #059669;
-  --accent-end: #34d399;
+  --accent-start: #0f0;
+  --accent-end: #00ff95;
   --fill-glow: #10b98190;
   --btn-accent-hover: rgba(16, 185, 129, 0.14);
 }
 
 [data-color="blue"] {
-  --accent-start: #2563eb;
-  --accent-end: #38bdf8;
+  --accent-start: #0000ff;
+  --accent-end: #0095ff;
   --fill-glow: #3b82f690;
   --btn-accent-hover: rgba(59, 130, 246, 0.14);
 }
@@ -101,7 +101,7 @@ body {
   font-size: 0.75rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  transition: background 0.4s, border-color 0.4s, color 0.4s;
 }
 
 .theme-picker__trigger:hover,
@@ -157,7 +157,7 @@ body {
   font: inherit;
   font-size: 0.8125rem;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.4s, border-color 0.4s;
 }
 
 .theme-picker__option:hover,
@@ -174,28 +174,28 @@ body {
 }
 
 .theme-picker__swatch--purple {
-  background: linear-gradient(135deg, #4500ff, #cc00ff);
+  background: linear-gradient(135deg, #8000ff, #c600ff);
 }
 
 .theme-picker__swatch--red {
-  background: linear-gradient(135deg, #dc2626, #f97316);
+  background: linear-gradient(135deg, #ff0000, #ff5000);
 }
 
 .theme-picker__swatch--yellow {
-  background: linear-gradient(135deg, #ca8a04, #facc15);
+  background: linear-gradient(135deg, #ffd700, #ffff00);
 }
 
 .theme-picker__swatch--green {
-  background: linear-gradient(135deg, #059669, #34d399);
+  background: linear-gradient(135deg, #00ff00, #00ff95);
 }
 
 .theme-picker__swatch--blue {
-  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  background: linear-gradient(135deg, #0000ff, #0095ff);
 }
 
 .task-section {
   margin-bottom: 1.25rem;
-  text-align: left;
+  text-align: left;  
 }
 
 .task-add {
@@ -215,6 +215,11 @@ body {
   font-size: 0.875rem;
 }
 
+.task-add__input:hover {
+  border-color: var(--accent-end);
+  transition: border-color 0.4s;
+}
+
 .task-add__input:focus {
   outline: none;
   border-color: var(--accent-end);
@@ -230,7 +235,7 @@ body {
   font-size: 1.25rem;
   line-height: 1;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.4s, border-color 0.4s;
 }
 
 .task-add__btn:hover {
@@ -263,7 +268,12 @@ body {
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) - 6px);
   background: var(--input-bg);
-  transition: border-color 0.2s, opacity 0.2s;
+  transition: border-color 0.4s, opacity 0.4s;
+}
+
+.task-item:hover {
+  border-color: var(--accent-end);
+  transition: border-color 0.4s;
 }
 
 .task-item--done {
@@ -286,7 +296,7 @@ body {
   color: transparent;
   cursor: pointer;
   flex-shrink: 0;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  transition: background 0.4s, border-color 0.4s, color 0.4s;
 }
 
 .task-item__check svg {
@@ -296,6 +306,7 @@ body {
 
 .task-item--done .task-item__check {
   background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+  border: 0px;
   border-color: transparent;
   color: #ffffff;
 }
@@ -318,7 +329,7 @@ body {
   color: var(--text-muted);
   cursor: pointer;
   flex-shrink: 0;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.4s, color 0.4s;
 }
 
 .task-item__delete svg {

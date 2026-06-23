@@ -196,7 +196,7 @@ function render() {
   const progress = getProgress();
 
   fill.style.width = progress.percent + '%';
-  label.textContent = '%' + formatPercent(progress.percent);
+  label.textContent = formatPercent(progress.percent) + '%';
   metaCounter.textContent = progress.done + ' / ' + progress.total + ' completed';
 
   if (progress.total === 0) {
