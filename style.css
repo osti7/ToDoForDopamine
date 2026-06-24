@@ -13,25 +13,28 @@
   --border: rgba(255, 255, 255, 0.1);
   --text: #eeeeee;
   --text-muted: #909090;
-  --accent-start: #8000ff;
-  --accent-end: #c600ff;
   --track: #1f1f1f;
   --input-bg: #000000;
-  --fill-glow: #7745ff90;
-  --btn-accent-hover: rgba(204, 0, 255, 0.14);
   --radius: 22px;
 }
 
 [data-color="red"] {
-  --accent-start: #ff0000;
-  --accent-end: #ff5000;
+  --accent-start: #d70020;
+  --accent-end: #ff0000;
   --fill-glow: #ef444490;
   --btn-accent-hover: rgba(239, 68, 68, 0.14);
 }
 
+[data-color="orange"] {
+  --accent-start: #ff3000;
+  --accent-end: #ff9000;
+  --fill-glow: #ef974490;
+  --btn-accent-hover: rgba(239, 154, 68, 0.14);
+}
+
 [data-color="yellow"] {
-  --accent-start: #ffff00;
-  --accent-end: #ffc300;
+  --accent-start: #ffb100;
+  --accent-end: #ffff00;
   --fill-glow: #eab30890;
   --btn-accent-hover: rgba(234, 179, 8, 0.14);
 }
@@ -50,11 +53,25 @@
   --btn-accent-hover: rgba(59, 130, 246, 0.14);
 }
 
+[data-color="purple"] {
+  --accent-start: #8000ff;
+  --accent-end: #c600ff;
+  --fill-glow: #7745ff90;
+  --btn-accent-hover: rgba(204, 0, 255, 0.14);
+}
+
+[data-color="pink"] {
+  --accent-start: #dd40ef;
+  --accent-end: #ff50ff;
+  --fill-glow: #ff20ee90;
+  --btn-accent-hover: rgba(255, 0, 144, 0.14);
+}
+
 [data-color="black"] {
   --accent-start: #000000;
-  --accent-end: #505050;
-  --fill-glow: #ffffff90;
-  --btn-accent-hover: rgba(161, 161, 161, 0.14);
+  --accent-end: #303030;
+  --fill-glow: #cccccc90;
+  --btn-accent-hover: rgba(85, 85, 85, 0.14);
 }
 
 body {
@@ -185,11 +202,15 @@ body {
 }
 
 .theme-picker__swatch--red {
-  background: linear-gradient(135deg, #ff0000, #ff5000);
+  background: linear-gradient(135deg, #d70020, #ff0000);
+}
+
+.theme-picker__swatch--orange {
+  background: linear-gradient(135deg, #ff3000, #ff9000);
 }
 
 .theme-picker__swatch--yellow {
-  background: linear-gradient(135deg, #ffd700, #ffff00);
+  background: linear-gradient(135deg, #ffb100, #ffff00);
 }
 
 .theme-picker__swatch--green {
@@ -200,8 +221,12 @@ body {
   background: linear-gradient(135deg, #0000ff, #0095ff);
 }
 
+.theme-picker__swatch--pink {
+  background: linear-gradient(135deg, #dd40ef, #ff50ff);
+}
+
 .theme-picker__swatch--black {
-  background: linear-gradient(135deg, #000000, #505050);
+  background: linear-gradient(135deg, #000000, #303030);
 }
 
 .task-section {
@@ -332,10 +357,10 @@ body {
 .task-item__delete {
   display: grid;
   place-items: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2rem;
+  height: 2rem;
   border: none;
-  border-radius: calc(var(--radius) - 10px);
+  border-radius: calc(var(--radius) - 12px);
   background: transparent;
   color: var(--text-muted);
   cursor: pointer;
@@ -350,7 +375,7 @@ body {
 
 .task-item__delete:hover {
   background: rgba(239, 68, 68, 0.15);
-  color: #f87171;
+  color: #ff5050;
 }
 
 .task-meta {
