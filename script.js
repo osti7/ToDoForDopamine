@@ -1,4 +1,5 @@
 const STORAGE_KEY = 'todoForDopamine';
+const VALID_THEMES = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink', 'black'];
 
 const fill = document.querySelector('.progress-fill');
 const label = document.querySelector('.progress-label');
@@ -11,16 +12,34 @@ const themeTrigger = document.querySelector('.theme-picker__trigger');
 const themeMenu = document.querySelector('.theme-picker__menu');
 const themeOptions = document.querySelectorAll('.theme-picker__option');
 
-const CHECK_ICON =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">' +
-  '<path d="M5 13l4 4L19 7"></path></svg>';
+function createCheckIcon() {
+  var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '3');
+  svg.setAttribute('aria-hidden', 'true');
+  var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', 'M5 13l4 4L19 7');
+  svg.appendChild(path);
+  return svg;
+}
 
-const TRASH_ICON =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
-  '<path d="M3 6h18"></path>' +
-  '<path d="M8 6V4h8v2"></path>' +
-  '<path d="M19 6l-1 14H6L5 6"></path>' +
-  '<path d="M10 11v6"></path><path d="M14 11v6"></path></svg>';
+function createTrashIcon() {
+  var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2');
+  svg.setAttribute('aria-hidden', 'true');
+  var paths = ['M3 6h18', 'M8 6V4h8v2', 'M19 6l-1 14H6L5 6', 'M10 11v6', 'M14 11v6'];
+  paths.forEach(function (d) {
+    var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    p.setAttribute('d', d);
+    svg.appendChild(p);
+  });
+  return svg;
+}
 
 let state = {
   tasks: [],
@@ -96,6 +115,9 @@ function formatStep(step) {
 }
 
 function applyColorTheme(colorTheme) {
+  if (VALID_THEMES.indexOf(colorTheme) === -1) {
+    colorTheme = 'purple';
+  }
   state.colorTheme = colorTheme;
   document.documentElement.setAttribute('data-color', colorTheme);
 
@@ -154,7 +176,9 @@ function deleteTask(id) {
 }
 
 function renderTasks() {
-  taskListEl.innerHTML = '';
+  while (taskListEl.firstChild) {
+    taskListEl.removeChild(taskListEl.firstChild);
+  }
 
   if (state.tasks.length === 0) {
     const emptyItem = document.createElement('li');
@@ -173,7 +197,7 @@ function renderTasks() {
     checkBtn.type = 'button';
     checkBtn.className = 'task-item__check';
     checkBtn.setAttribute('aria-label', task.done ? 'Mark as incomplete' : 'Mark as complete');
-    checkBtn.innerHTML = CHECK_ICON;
+    checkBtn.appendChild(createCheckIcon());
 
     const textSpan = document.createElement('span');
     textSpan.className = 'task-item__text';
@@ -183,7 +207,7 @@ function renderTasks() {
     deleteBtn.type = 'button';
     deleteBtn.className = 'task-item__delete';
     deleteBtn.setAttribute('aria-label', 'Delete task');
-    deleteBtn.innerHTML = TRASH_ICON;
+    deleteBtn.appendChild(createTrashIcon());
 
     item.appendChild(checkBtn);
     item.appendChild(textSpan);

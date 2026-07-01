@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self';">
   <title>To-Do For Dopamine</title>
   <script>
     (function () {
       try {
+        var VALID_THEMES = ['red','orange','yellow','green','blue','purple','pink','black'];
         var saved = JSON.parse(localStorage.getItem('todoForDopamine') || '{}');
-        if (saved.colorTheme) {
+        if (saved.colorTheme && VALID_THEMES.indexOf(saved.colorTheme) !== -1) {
           document.documentElement.setAttribute('data-color', saved.colorTheme);
         }
       } catch (error) {}
