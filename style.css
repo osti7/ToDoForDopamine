@@ -16,6 +16,7 @@
   --track: #1f1f1f;
   --input-bg: #000000;
   --radius: 22px;
+  --radius-inner: calc(var(--radius) - 6px);
 }
 
 [data-color="red"] {
@@ -144,7 +145,7 @@ body {
   padding: 0.75rem;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: calc(var(--radius) - 6px);
+  border-radius: var(--radius-inner);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
   text-align: left;
 }
@@ -195,38 +196,7 @@ body {
   height: 1.25rem;
   border-radius: 999px;
   flex-shrink: 0;
-}
-
-.theme-picker__swatch--purple {
-  background: linear-gradient(135deg, #8000ff, #c600ff);
-}
-
-.theme-picker__swatch--red {
-  background: linear-gradient(135deg, #d70020, #ff0000);
-}
-
-.theme-picker__swatch--orange {
-  background: linear-gradient(135deg, #ff3000, #ff9000);
-}
-
-.theme-picker__swatch--yellow {
-  background: linear-gradient(135deg, #ffb100, #ffff00);
-}
-
-.theme-picker__swatch--green {
-  background: linear-gradient(135deg, #00ff00, #00ff95);
-}
-
-.theme-picker__swatch--blue {
-  background: linear-gradient(135deg, #0000ff, #0095ff);
-}
-
-.theme-picker__swatch--pink {
-  background: linear-gradient(135deg, #dd40ef, #ff50ff);
-}
-
-.theme-picker__swatch--black {
-  background: linear-gradient(135deg, #000000, #303030);
+  background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
 }
 
 .task-section {
@@ -244,7 +214,7 @@ body {
   flex: 1;
   padding: 0.65rem 0.75rem;
   border: 1px solid var(--border);
-  border-radius: calc(var(--radius) - 6px);
+  border-radius: var(--radius-inner);
   background: var(--input-bg);
   color: var(--text);
   font: inherit;
@@ -264,7 +234,7 @@ body {
 .task-add__btn {
   width: 2.75rem;
   border: 1px solid var(--border);
-  border-radius: calc(var(--radius) - 6px);
+  border-radius: var(--radius-inner);
   background: transparent;
   color: var(--accent-end);
   font: inherit;
@@ -290,7 +260,7 @@ body {
 .task-list__empty {
   padding: 0.75rem;
   border: 1px dashed var(--border);
-  border-radius: calc(var(--radius) - 6px);
+  border-radius: var(--radius-inner);
   text-align: center;
   font-size: 0.8125rem;
   color: var(--text-muted);
@@ -302,7 +272,7 @@ body {
   gap: 0.65rem;
   padding: 0.55rem 0.65rem;
   border: 1px solid var(--border);
-  border-radius: calc(var(--radius) - 6px);
+  border-radius: var(--radius-inner);
   background: var(--input-bg);
   transition: border-color 0.4s, opacity 0.4s;
 }

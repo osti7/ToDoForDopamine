@@ -9,7 +9,6 @@ const metaCounter = document.querySelector('.task-meta-counter');
 const metaStep = document.querySelector('.task-meta-step');
 const themeTrigger = document.querySelector('.theme-picker__trigger');
 const themeMenu = document.querySelector('.theme-picker__menu');
-const themeOptions = document.querySelectorAll('.theme-picker__option');
 
 const CHECK_ICON =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">' +
@@ -22,10 +21,43 @@ const TRASH_ICON =
   '<path d="M19 6l-1 14H6L5 6"></path>' +
   '<path d="M10 11v6"></path><path d="M14 11v6"></path></svg>';
 
+const THEME_OPTIONS = [
+  { color: 'red', label: 'RD' },
+  { color: 'orange', label: 'RNG' },
+  { color: 'yellow', label: 'YLLW' },
+  { color: 'green', label: 'GRN' },
+  { color: 'blue', label: 'BL' },
+  { color: 'purple', label: 'PRPL' },
+  { color: 'pink', label: 'PNK' },
+  { color: 'black', label: 'BLCK' },
+];
+
 let state = {
   tasks: [],
   colorTheme: 'purple',
 };
+
+function createElement(tag, props) {
+  var el = document.createElement(tag);
+  Object.keys(props).forEach(function (key) {
+    if (key === 'className') {
+      el.className = props[key];
+    } else if (key === 'textContent') {
+      el.textContent = props[key];
+    } else if (key === 'innerHTML') {
+      el.innerHTML = props[key];
+    } else {
+      el.setAttribute(key, props[key]);
+    }
+  });
+  return el;
+}
+
+function findTaskById(id) {
+  return state.tasks.find(function (item) {
+    return item.id === id;
+  });
+}
 
 function loadState() {
   try {
@@ -99,27 +131,14 @@ function applyColorTheme(colorTheme) {
   state.colorTheme = colorTheme;
   document.documentElement.setAttribute('data-color', colorTheme);
 
-  themeOptions.forEach(function (option) {
+  document.querySelectorAll('.theme-picker__option').forEach(function (option) {
     option.classList.toggle('is-active', option.dataset.color === colorTheme);
   });
 }
 
-function openThemeMenu() {
-  themeMenu.hidden = false;
-  themeTrigger.setAttribute('aria-expanded', 'true');
-}
-
-function closeThemeMenu() {
-  themeMenu.hidden = true;
-  themeTrigger.setAttribute('aria-expanded', 'false');
-}
-
-function toggleThemeMenu() {
-  if (themeMenu.hidden) {
-    openThemeMenu();
-  } else {
-    closeThemeMenu();
-  }
+function setThemeMenuOpen(isOpen) {
+  themeMenu.hidden = !isOpen;
+  themeTrigger.setAttribute('aria-expanded', String(isOpen));
 }
 
 function addTask(text) {
@@ -136,10 +155,7 @@ function addTask(text) {
 }
 
 function toggleTask(id) {
-  const task = state.tasks.find(function (item) {
-    return item.id === id;
-  });
-
+  const task = findTaskById(id);
   if (!task) {
     return;
   }
@@ -153,41 +169,61 @@ function deleteTask(id) {
   });
 }
 
+function renderThemeOptions() {
+  var container = document.querySelector('.theme-picker__options');
+  container.innerHTML = '';
+
+  THEME_OPTIONS.forEach(function (theme) {
+    var colorName = theme.color.charAt(0).toUpperCase() + theme.color.slice(1);
+    var btn = createElement('button', {
+      type: 'button',
+      className: 'theme-picker__option',
+      'data-color': theme.color,
+      'aria-label': colorName + ' theme',
+    });
+
+    btn.appendChild(createElement('span', { className: 'theme-picker__swatch' }));
+    btn.appendChild(document.createTextNode(' ' + theme.label));
+    container.appendChild(btn);
+  });
+}
+
 function renderTasks() {
   taskListEl.innerHTML = '';
 
   if (state.tasks.length === 0) {
-    const emptyItem = document.createElement('li');
-    emptyItem.className = 'task-list__empty';
-    emptyItem.textContent = 'No tasks yet. Add one with +';
-    taskListEl.appendChild(emptyItem);
+    taskListEl.appendChild(createElement('li', {
+      className: 'task-list__empty',
+      textContent: 'No tasks yet. Add one with +',
+    }));
     return;
   }
 
   state.tasks.forEach(function (task) {
-    const item = document.createElement('li');
-    item.className = 'task-item' + (task.done ? ' task-item--done' : '');
-    item.dataset.id = task.id;
+    var item = createElement('li', {
+      className: 'task-item' + (task.done ? ' task-item--done' : ''),
+      'data-id': task.id,
+    });
 
-    const checkBtn = document.createElement('button');
-    checkBtn.type = 'button';
-    checkBtn.className = 'task-item__check';
-    checkBtn.setAttribute('aria-label', task.done ? 'Mark as incomplete' : 'Mark as complete');
-    checkBtn.innerHTML = CHECK_ICON;
+    item.appendChild(createElement('button', {
+      type: 'button',
+      className: 'task-item__check',
+      'aria-label': task.done ? 'Mark as incomplete' : 'Mark as complete',
+      innerHTML: CHECK_ICON,
+    }));
 
-    const textSpan = document.createElement('span');
-    textSpan.className = 'task-item__text';
-    textSpan.textContent = task.text;
+    item.appendChild(createElement('span', {
+      className: 'task-item__text',
+      textContent: task.text,
+    }));
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.type = 'button';
-    deleteBtn.className = 'task-item__delete';
-    deleteBtn.setAttribute('aria-label', 'Delete task');
-    deleteBtn.innerHTML = TRASH_ICON;
+    item.appendChild(createElement('button', {
+      type: 'button',
+      className: 'task-item__delete',
+      'aria-label': 'Delete task',
+      innerHTML: TRASH_ICON,
+    }));
 
-    item.appendChild(checkBtn);
-    item.appendChild(textSpan);
-    item.appendChild(deleteBtn);
     taskListEl.appendChild(item);
   });
 }
@@ -210,6 +246,7 @@ function render() {
 }
 
 loadState();
+renderThemeOptions();
 applyColorTheme(state.colorTheme || 'purple');
 render();
 
@@ -243,25 +280,27 @@ taskListEl.addEventListener('click', function (event) {
 
 themeTrigger.addEventListener('click', function (event) {
   event.stopPropagation();
-  toggleThemeMenu();
+  setThemeMenuOpen(themeMenu.hidden);
 });
 
-themeOptions.forEach(function (option) {
-  option.addEventListener('click', function () {
-    applyColorTheme(option.dataset.color);
-    saveState();
-    closeThemeMenu();
-  });
+themeMenu.addEventListener('click', function (event) {
+  var option = event.target.closest('.theme-picker__option');
+  if (!option) {
+    return;
+  }
+  applyColorTheme(option.dataset.color);
+  saveState();
+  setThemeMenuOpen(false);
 });
 
 document.addEventListener('click', function (event) {
   if (!event.target.closest('.theme-picker')) {
-    closeThemeMenu();
+    setThemeMenuOpen(false);
   }
 });
 
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Escape') {
-    closeThemeMenu();
+    setThemeMenuOpen(false);
   }
 });
